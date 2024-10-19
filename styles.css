@@ -1,0 +1,46 @@
+*{
+   box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+:root{
+    --button-color:rgb(99, 99, 235);
+}
+
+body{
+    padding-top: 50px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+  align-items: center;
+  gap:40px;
+}
+
+button{
+    background:var(--button-color);
+    color:white;
+    padding:10px;
+    border-radius: 5px;
+}
+input{
+    border:2px solid var(--button-color);
+    padding:10px;
+    border-radius: 5px;
+    color:cornflowerblue;
+    min-width: 300px;
+
+}
+input::placeholder{
+    color:cornflowerblue;
+}
+.form{
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+}
+#quoteDisplay{
+    font-size:20px;
+    color:var(--button-color);
+    font-weight: 700;
+}
