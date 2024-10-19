@@ -48,13 +48,12 @@ function addQuote(){
   }
   
 }
-
-
+function displayRandomQoute(){
+  let quoteDisplay =document.getElementById("quoteDisplay");
+  const newQoute =showRandomQuote().text;
+   quoteDisplay.textContent =newQoute;
+}
 document.addEventListener('DOMContentLoaded',function(){
   let newQouteButton =document.getElementById("newQuote");
-   let quoteDisplay =document.getElementById("quoteDisplay");
-  newQouteButton.addEventListener("click",function(){
-    const newQoute =showRandomQuote().text;
-    quoteDisplay.textContent =newQoute;
-  })
+  newQouteButton.addEventListener("click",displayRandomQoute)
 })
