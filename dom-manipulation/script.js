@@ -48,7 +48,7 @@ function addQuote(){
   }
   
 }
-function displayRandomQoute(){
+function displayRandomQuote(){
   let quoteDisplay =document.getElementById("quoteDisplay");
   const newQoute =showRandomQuote().text;
    quoteDisplay.textContent =newQoute;
