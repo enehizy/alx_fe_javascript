@@ -22,6 +22,7 @@ const quotes = [
   
 function  createAddQuoteForm(qoute){
     quotes.push(qoute);
+    
 }
   
 function showRandomQuote(){
@@ -37,10 +38,13 @@ function addQuote(){
         category:category.value
        }
       createAddQuoteForm(newQoute)
+      let p = document.createElement("p");
+      p.textContent =text;
+      let quoteDisplay =document.getElementById("quoteDisplay");
       text.value=" ";
       category.value =" "
-      console.log(quotes)
-      alert("new quote added")
+      quoteDisplay.appendChild()
+     
      
   }else{
     alert("text or category field cannot be empty")
