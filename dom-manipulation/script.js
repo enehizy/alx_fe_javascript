@@ -51,7 +51,7 @@ function addQuote(){
 function displayRandomQuote(){
   let quoteDisplay =document.getElementById("quoteDisplay");
   const newQoute =showRandomQuote().text;
-   quoteDisplay.textContent =newQoute;
+   quoteDisplay.innerHTML = `<p>${newQoute}<p>`;
 }
 document.addEventListener('DOMContentLoaded',function(){
   let newQouteButton =document.getElementById("newQuote");
