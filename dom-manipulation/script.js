@@ -149,7 +149,13 @@ function filterQuotes(){
 
 async function fetchQuotesFromServer() {
   try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts',{
+    method:"POST",
+    headers:{
+      "Content-Type": "application/json"
+    }
+      
+    });
     const serverQuotes = await response.json();
     // Convert posts to quote format (simulate)
     return serverQuotes.map(post => ({
