@@ -180,7 +180,7 @@ async function syncQuotes() {
     hasConflict = true;
     quotes = serverQuotes; 
     saveQuotes(); 
-   
+   alert("Quotes synced with server!")
   }
 
  
