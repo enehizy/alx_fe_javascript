@@ -135,15 +135,14 @@ function populateCategories(){
 }
 function filterQuotes(){
     const dropdown =document.getElementById("categoryFilter");
-    const selectedValue = `${dropdown.value}`; 
+    const selectedCategory = `${dropdown.value}`; 
    quotes =getQuotes()
-  let selectedCategories=quotes.filter((qoute)=>{
-    if(selectedValue === 'All Categories'){
+  quotes=quotes.filter((qoute)=>{
+    if(selectedCategory === 'All Categories'){
       return
     }
     return qoute.category === selectedValue
     })
-    quotes = selectedCategories;
  displayQuote(quotes)
   
 }
