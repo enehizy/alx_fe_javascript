@@ -146,9 +146,44 @@ function filterQuotes(){
  displayQuote(quotes)
   
 }
+
+async function fetchQuotesFromServer() {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const serverQuotes = await response.json();
+    // Convert posts to quote format (simulate)
+    return serverQuotes.map(post => ({
+      text: post.title,
+      category: "Server"
+    }));
+  } catch (error) {
+    console.error('Failed to fetch quotes from server:', error);
+  }
+}
+
+
+async function syncWithServer() {
+  const serverQuotes = await fetchQuotesFromServer();
+  if (!serverQuotes) return;
+
+  let hasConflict = false;
+  const localQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
+
+ 
+  if (JSON.stringify(localQuotes) !== JSON.stringify(serverQuotes)) {
+    hasConflict = true;
+    quotes = serverQuotes; 
+    saveQuotes(); 
+   
+  }
+
+ 
+  document.getElementById('syncStatus').textContent = hasConflict ? "Quotes were updated from the server due to conflict." : "Quotes are synced.";
+}
 document.addEventListener('DOMContentLoaded',function(){
   getQuotes();
-  populateCategories();
+  populateCategories(); 
+  setInterval(syncWithServer, 10000);
   let newQouteButton =document.getElementById("newQuote");
   newQouteButton.addEventListener("click",displayRandomQuote)
   
