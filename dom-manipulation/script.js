@@ -1,4 +1,4 @@
-const quotes = [];
+let quotes = [];
 let hardCodedQoutes= [{ text: "The only limit to our realization of tomorrow is our doubts of today.", category: "Motivation" },
   { text: "In the end, we will remember not the words of our enemies, but the silence of our friends.", category: "Inspiration" },
   { text: "Life is 10% what happens to us and 90% how we react to it.", category: "Life" },
@@ -25,7 +25,7 @@ function  createAddQuoteForm(qoute){
   
 function showRandomQuote(){
     const getRandomQoute=Math.round(Math.random() * (quotes.length -1));
-    return quotes[getRandomQoute];
+    return [quotes[getRandomQoute]];
 }
 function saveQuotes() {
   localStorage.setItem('quotes', JSON.stringify(quotes));
@@ -35,7 +35,7 @@ function getQuotes(){
   if(savedQuotes){
    
         savedQuotes = JSON.parse(savedQuotes);
-        quotes.push(...savedQuotes,...hardCodedQoutes)
+        quotes.push(...savedQuotes)
         return quotes;
         
   }
@@ -95,32 +95,56 @@ function addQuote(){
 }
 function displayRandomQuote(){
  
-  let quoteDisplay =document.getElementById("quoteDisplay");
+  
   
   const newQoute =showRandomQuote();
+  displayQuote(newQoute)
+  
+}
+function displayQuote(newQoute){
+  let quoteDisplay =document.getElementById("quoteDisplay");
+  let ol =document.createElement('ol')
  
-   quoteDisplay.innerHTML = `<div><p>${newQoute.text} <p><h5>${newQoute.category}<h5></div>`;
+  quoteDisplay.innerHTML =" ";
+ newQoute.forEach((qoute)=>{
+   const li =document.createElement("li")
+   li.innerHTML =`${qoute.text}`
+   ol.appendChild(li);
+   quoteDisplay.appendChild(ol)
+ })
+ 
 }
 
 
 function populateCategories(){
   const dropdown =document.getElementById("categoryFilter");
   
-  quotes.forEach((qoute)=>{
+  let  categories=quotes.map((qoute)=>{
+    return qoute.category;
+  })
+  categories = new Set(categories)
+  
+
+  categories.forEach((category)=>{
     const option = document.createElement("option");
-    option.innerText = qoute.category;
+    option.innerText = category;
     dropdown.appendChild(option)
   })
-  saveQuotes()
+  
+  
 }
 function filterQuotes(){
-const dropdown =document.getElementById("categoryFilter");
-const selectedValue = dropdown.value; 
-alert("qoutes to filter")
-quotes.filter((qoute)=>{
- return qoute.category === selectedValue
-})
-console.log(quotes)
+    const dropdown =document.getElementById("categoryFilter");
+    const selectedValue = `${dropdown.value}`; 
+   quotes =getQuotes()
+  quotes=quotes.filter((qoute)=>{
+    if(selectedValue === 'All Categories'){
+      return
+    }
+    return qoute.category === selectedValue
+    })
+ displayQuote(quotes)
+  
 }
 document.addEventListener('DOMContentLoaded',function(){
   getQuotes();
