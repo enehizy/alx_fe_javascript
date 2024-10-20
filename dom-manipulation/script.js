@@ -137,12 +137,13 @@ function filterQuotes(){
     const dropdown =document.getElementById("categoryFilter");
     const selectedValue = `${dropdown.value}`; 
    quotes =getQuotes()
-  quotes=quotes.filter((qoute)=>{
+  let selectedCategories=quotes.filter((qoute)=>{
     if(selectedValue === 'All Categories'){
       return
     }
     return qoute.category === selectedValue
     })
+    quotes = selectedCategories;
  displayQuote(quotes)
   
 }
