@@ -36,7 +36,6 @@ function getQuotes(){
    
         savedQuotes = JSON.parse(savedQuotes);
         quotes.push(...savedQuotes,...hardCodedQoutes)
-        console.log(" running getQoutes")
         return quotes;
         
   }
@@ -57,6 +56,16 @@ function importFromJsonFile(event) {
     alert('Quotes imported successfully!');
   };
   fileReader.readAsText(event.target.files[0]);
+}
+function exportToJson() {
+  const dataStr = JSON.stringify(quotes, null, 2);
+  const blob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = "quotes.json";
+  a.click();
+  URL.revokeObjectURL(url); 
 }
 
 function addQuote(){
@@ -85,27 +94,18 @@ function addQuote(){
   
 }
 function displayRandomQuote(){
+ 
   let quoteDisplay =document.getElementById("quoteDisplay");
+  
   const newQoute =showRandomQuote().text;
+  
    quoteDisplay.innerHTML = `<p>${newQoute}<p>`;
 }
-function initailizedQoutes(){
-  console.log("function running")
-  let initailQoutes= getQuotes();
-  console.log({quotes})
 
-
-
-
-
-
-
-
-
-
-}
 document.addEventListener('DOMContentLoaded',function(){
-  initailizedQoutes();
+  getQuotes();
+  
   let newQouteButton =document.getElementById("newQuote");
-  newQouteButton.addEventListener("click",displayRandomQoute)
+  newQouteButton.addEventListener("click",displayRandomQuote)
+  
 })
