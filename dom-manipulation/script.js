@@ -168,7 +168,7 @@ async function fetchQuotesFromServer() {
 }
 
 
-async function syncWithServer() {
+async function syncQuotes() {
   const serverQuotes = await fetchQuotesFromServer();
   if (!serverQuotes) return;
 
@@ -189,7 +189,7 @@ async function syncWithServer() {
 document.addEventListener('DOMContentLoaded',function(){
   getQuotes();
   populateCategories(); 
-  setInterval(syncWithServer, 10000);
+  setInterval(syncQuotes, 10000);
   let newQouteButton =document.getElementById("newQuote");
   newQouteButton.addEventListener("click",displayRandomQuote)
   
