@@ -97,14 +97,34 @@ function displayRandomQuote(){
  
   let quoteDisplay =document.getElementById("quoteDisplay");
   
-  const newQoute =showRandomQuote().text;
-  
-   quoteDisplay.innerHTML = `<p>${newQoute}<p>`;
+  const newQoute =showRandomQuote();
+ 
+   quoteDisplay.innerHTML = `<div><p>${newQoute.text} <p><h5>${newQoute.category}<h5></div>`;
 }
 
+
+function populateCategories(){
+  const dropdown =document.getElementById("categoryFilter");
+  
+  quotes.forEach((qoute)=>{
+    const option = document.createElement("option");
+    option.innerText = qoute.category;
+    dropdown.appendChild(option)
+  })
+  saveQuotes()
+}
+function filterQuotes(){
+const dropdown =document.getElementById("categoryFilter");
+const selectedValue = dropdown.value; 
+alert("qoutes to filter")
+quotes.filter((qoute)=>{
+ return qoute.category === selectedValue
+})
+console.log(quotes)
+}
 document.addEventListener('DOMContentLoaded',function(){
   getQuotes();
-  
+  populateCategories();
   let newQouteButton =document.getElementById("newQuote");
   newQouteButton.addEventListener("click",displayRandomQuote)
   

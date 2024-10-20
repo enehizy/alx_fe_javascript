@@ -44,3 +44,8 @@ input::placeholder{
     color:var(--button-color);
     font-weight: 700;
 }
+select{
+    padding:10px;
+    border-radius: 10px;
+    border: 0.5 solid var(--button-color);
+}
